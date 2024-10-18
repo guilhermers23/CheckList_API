@@ -22,7 +22,8 @@ const findAllListTestService = async () => {
     if (testes.length === 0) throw new Error("No registered Testes!");
 
     return testes;
-}
+};
+
 
 export default {
     createTesteService,
