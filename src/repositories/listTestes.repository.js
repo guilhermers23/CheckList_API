@@ -1,7 +1,7 @@
-import ListTestes from "../models/ListTestes.js";
+import ListTestes from "../models/testes.js";
 
-const createTesteRepository = (system, functionality, descriptiontTest, userId) => {
-    return ListTestes.create({ system, functionality, descriptiontTest, user: userId });
+const createTesteRepository = (grupo, subGrupo, itHappened, descriptiontTest, tecnico) => {
+    return ListTestes.create({ grupo, subGrupo, itHappened, descriptiontTest, tecnico });
 };
 
 const findALLListTestRepository = () => {

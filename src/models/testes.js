@@ -1,21 +1,23 @@
 import mongoose from "mongoose";
 
 const TestesSchema = new mongoose.Schema({
-    // user: {
-    //     user: {
-    //         type: mongoose.Types.ObjectId,
-    //         ref: "User",
-    //         require: true,
-    //     },
-    system: {
+    tecnico: {
         type: String,
         require: true
     },
-    functionality: {
+    grupo: {
+        type: String,
+        require: true
+    },
+    subGrupo: {
         type: String,
         require: true
     },
     descriptiontTest: {
+        type: String,
+        require: true
+    },
+    itHappened: {
         type: String,
         require: true
     },
@@ -29,6 +31,6 @@ const TestesSchema = new mongoose.Schema({
     }
 });
 
-const ListTestes = mongoose.model("ListTestes", TestesSchema);
+const Teste = mongoose.model("Teste", TestesSchema);
 
-export default ListTestes;
+export default Teste;
