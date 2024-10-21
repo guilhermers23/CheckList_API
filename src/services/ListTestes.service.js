@@ -1,20 +1,19 @@
 import listTestesRepository from "../repositories/listTestes.repository.js";
 
-const createTesteService = async ({ tecnico, grupo, subGrupo, itHappened, descriptiontTest }) => {
-    if (!tecnico || !grupo || !subGrupo || !descriptiontTest || !itHappened)
+const createTesteService = async ({ tecnico, grupo, subGrupo, description }) => {
+    if (!tecnico || !grupo || !subGrupo || !description)
         throw new Error("Failed to send data! Check all fields.");
 
     const { id } = await listTestesRepository.createTesteRepository(
         tecnico,
         grupo,
         subGrupo,
-        descriptiontTest,
-        itHappened
+        description
     );
 
     return {
         message: "Teste created successfully!",
-        teste: { id, tecnico, grupo, subGrupo, descriptiontTest, itHappened }
+        teste: { id, tecnico, grupo, subGrupo, description }
     };
 };
 

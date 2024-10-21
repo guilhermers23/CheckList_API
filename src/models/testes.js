@@ -13,7 +13,7 @@ const TestesSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    descriptiontTest: {
+    description: {
         type: String,
         require: true
     },

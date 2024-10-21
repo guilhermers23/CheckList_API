@@ -1,12 +1,12 @@
 import listTestesService from "../services/ListTestes.service.js";
 
 const createTesteController = async (req, res) => {
-    const { grupo, subGrupo, itHappened, descriptiontTest } = req.body;
+    const { tecnico, grupo, subGrupo, description } = req.body;
     //const userId = req.userId;
 
     try {
         const test = await listTestesService.createTesteService(
-            { grupo, subGrupo, itHappened, descriptiontTest }
+            { tecnico, grupo, subGrupo, description }
         );
 
         return res.status(201).send(test);

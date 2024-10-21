@@ -1,7 +1,7 @@
 import ListTestes from "../models/testes.js";
 
-const createTesteRepository = (grupo, subGrupo, itHappened, descriptiontTest, tecnico) => {
-    return ListTestes.create({ grupo, subGrupo, itHappened, descriptiontTest, tecnico });
+const createTesteRepository = (tecnico, grupo, subGrupo, description) => {
+    return ListTestes.create({ tecnico, grupo, subGrupo, description });
 };
 
 const findALLListTestRepository = () => {
