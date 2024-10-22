@@ -17,7 +17,7 @@ const TestesSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    itHappened: {
+    resultado: {
         type: String,
         require: true
     },
@@ -25,7 +25,7 @@ const TestesSchema = new mongoose.Schema({
         type: Array,
         require: true
     },
-    observations: {
+    observacao: {
         type: String,
         require: false
     }
