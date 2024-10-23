@@ -1,56 +1,67 @@
 import gruposService from "../services/grupos.service.js";
 
-const createGrupoController = async (req, res) => {
-    const { grupo } = req.body;
-    //const userId = req.userId;
+class GruposController {
 
-    try {
-        const response = await gruposService.createGrupoService(
-            { grupo }
-        );
+    async criarGrupo(req, res) {
+        try {
+            const { nome } = req.body;
 
-        return res.status(201).send(response);
-    } catch (error) {
-        res.status(500).send(error.message)
+            // Criar novo grupo
+            const grupo = await gruposService.criarGrupo({ nome });
+
+            return res.status(201).json(grupo);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    };
+
+    async buscarTodosGrupos(req, res) {
+        try {
+            const grupos = await gruposService.buscarTodosGrupos();
+            if (grupos.length === 0) {
+                res.json({ message: "Nenhum grupo encontrado!" })
+            }
+            return res.status(200).json(grupos);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    };
+
+    async criarSubGrupo(req, res) {
+        try {
+            const { nome, grupoId } = req.body;
+
+            // Criar novo subgrupo referenciando o grupo
+            const subGrupo = await gruposService.criarSubGrupo({ nome, grupo: grupoId });
+
+            return res.status(201).json(subGrupo);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    };
+
+    async buscarTodosSubGrupos(req, res) {
+        try {
+            const subGrupos = await gruposService.buscarTodosSubGrupos();
+            if (subGrupos.length === 0) {
+                res.json({ message: "Nenhum SubGrupo encontrado!" })
+            }
+            return res.status(200).json(subGrupos);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    };
+
+    async buscarSubGruposPorGrupo(req, res) {
+        try {
+            const { grupoId } = req.params;
+            const subGrupos = await gruposService.buscarPorGrupo(grupoId);
+
+            return res.status(200).json(subGrupos);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
     }
 };
 
-const createSubGrupoController = async (req, res) => {
-    const { subGrupo } = req.body;
-    //const userId = req.userId;
-
-    try {
-        const response = await gruposService.createSubGrupoService(
-            { subGrupo }
-        );
-
-        return res.status(201).send(response);
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
-};
-
-const findAllGrupoController = async (req, res) => {
-    try {
-        const grupo = await gruposService.findAllGrupoService();
-        return res.send(grupo);
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
-};
-
-const findAllSubGrupoController = async (req, res) => {
-    try {
-        const subGrupo = await gruposService.findAllSubGrupoService();
-        return res.send(subGrupo);
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
-};
-
-export default {
-    createGrupoController,
-    createSubGrupoController,
-    findAllGrupoController,
-    findAllSubGrupoController
-}
+export default new GruposController();

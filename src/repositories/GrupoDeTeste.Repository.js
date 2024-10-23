@@ -9,6 +9,10 @@ class GrupoDeTesteRepository {
   async buscarPorNome(nome) {
     return await GrupoDeTeste.findOne({ nome });
   }
+
+  async buscarTodosGrupos() {
+    return await GrupoDeTeste.find();
+  }
 }
 
 export default new GrupoDeTesteRepository();

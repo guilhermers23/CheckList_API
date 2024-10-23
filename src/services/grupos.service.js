@@ -1,50 +1,27 @@
-import gruposRepository from "../repositories/GrupoDeTeste.Repository.js";
+import GrupoDeTesteRepository from "../repositories/GrupoDeTeste.Repository.js";
+import SubGrupoDeTesteRepository from "../repositories/SubGrupoDeTeste.Repository.js";
 
-const createGrupoService = async ({ grupo }) => {
-    if (!grupo)
-        throw new Error("Failed to send data! Check all fields.");
+class GruposService {
 
-    const { id } = await gruposRepository.createGrupoRepository(
-        grupo,
-    );
+  async criarGrupo(data) {
+    return await GrupoDeTesteRepository.criarGrupo(data);
+  };
 
-    return {
-        message: "Grupo created successfully!",
-        grupo: { id, grupo }
-    };
-};
+  async buscarTodosGrupos() {
+    return await GrupoDeTesteRepository.buscarTodosGrupos();
+  };
 
-const createSubGrupoService = async ({ subGrupo }) => {
-    if (!subGrupo)
-        throw new Error("Failed to send data! Check all fields.");
+  async criarSubGrupo(data) {
+    return await SubGrupoDeTesteRepository.criarSubGrupo(data);
+  };
 
-    const { id } = await gruposRepository.createSubGrupoRepository(
-        subGrupo,
-    );
+  async buscarTodosSubGrupos() {
+    return await SubGrupoDeTesteRepository.buscarTodosSubGrupos();
+  };
 
-    return {
-        message: "SubGrupo created successfully!",
-        subGrupo: { id, subGrupo }
-    };
-};
-
-const findAllGrupoService = async () => {
-    const grupo = await gruposRepository.findAllGrupoRepository();
-    if (grupo.length === 0) throw new Error("No registered Grupo!");
-
-    return grupo;
-};
-
-const findAllSubGrupoService = async () => {
-    const subGrupo = await gruposRepository.findAllSubGrupoRepository();
-    if (subGrupo.length === 0) throw new Error("No registered SubGrupo!");
-
-    return subGrupo;
-};
-
-export default {
-    createGrupoService,
-    createSubGrupoService,
-    findAllGrupoService,
-    findAllSubGrupoService
+  async buscarPorGrupo(grupoId) {
+    return await SubGrupoDeTesteRepository.buscarPorGrupo(grupoId);
+  };
 }
+
+export default new GruposService();
