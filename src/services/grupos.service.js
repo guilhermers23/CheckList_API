@@ -1,4 +1,4 @@
-import gruposRepository from "../repositories/grupos.repository.js";
+import gruposRepository from "../repositories/GrupoDeTeste.Repository.js";
 
 const createGrupoService = async ({ grupo }) => {
     if (!grupo)

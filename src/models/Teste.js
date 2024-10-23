@@ -3,31 +3,33 @@ import mongoose from "mongoose";
 const TestesSchema = new mongoose.Schema({
     tecnico: {
         type: String,
-        require: true
+        required: true,
     },
     grupo: {
-        type: String,
-        require: true
+        type: mongoose.Types.ObjectId,
+        ref: "GrupoDeTeste",
+        required: true,
     },
     subGrupo: {
-        type: String,
-        require: true
+        type: mongoose.Types.ObjectId,
+        ref: "SubGrupoDeTeste",
+        required: true,
     },
     description: {
         type: String,
-        require: true
+        required: true,
     },
     resultado: {
         type: String,
-        require: true
+        required: true,
     },
     completed: {
         type: Array,
-        require: true
+        required: true,
     },
     observacao: {
         type: String,
-        require: false
+        required: false,
     }
 });
 
