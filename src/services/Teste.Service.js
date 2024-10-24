@@ -41,8 +41,12 @@ class TesteService {
     return teste;
   };
 
-  async buscarTodos() {
-    return await TesteRepository.buscarTodos();
+  async buscarTestesPorFiltro(grupoId, subGrupoId) {
+    const filtro = {};
+    if (grupoId) filtro.grupo = grupoId;
+    if (subGrupoId) filtro.subGrupo = subGrupoId;
+
+    return await TesteRepository.buscarPorFiltro(filtro);
   };
 
   async atualizarTeste(id, data) {
@@ -52,6 +56,7 @@ class TesteService {
     }
     return await TesteRepository.atualizarTeste(id, data);
   };
+
 
   async excluirTeste(id) {
     const teste = await this.buscarPorId(id);

@@ -29,19 +29,7 @@ class TesteController {
     } catch (error) {
       return res.status(404).json({ error: error.message });
     }
-  }
-
-  async buscarTodos(req, res) {
-    try {
-      const testes = await TesteService.buscarTodos();
-      if(testes.length === 0){
-        res.json({message: "Nenhum teste encontrado!"})
-      }
-      return res.status(200).json(testes);
-    } catch (error) {
-      return res.status(400).json({ error: error.message });
-    }
-  }
+  };
 
   async atualizarTeste(req, res) {
     try {
@@ -50,7 +38,7 @@ class TesteController {
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
-  }
+  };
 
   async excluirTeste(req, res) {
     try {
@@ -59,7 +47,20 @@ class TesteController {
     } catch (error) {
       return res.status(404).json({ error: error.message });
     }
-  }
+  };
+
+  async listarTestesPorFiltro(req, res) {
+    try {
+      const { grupoId, subGrupoId } = req.query;
+      const testes = await TesteService.buscarTestesPorFiltro(grupoId, subGrupoId);
+      if (testes.length === 0) {
+        res.json({ message: "Nenhum teste encontrado!" })
+      }
+      return res.status(200).json(testes);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  };
 }
 
 export default new TesteController();

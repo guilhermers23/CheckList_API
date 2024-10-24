@@ -6,7 +6,7 @@ import gruposController from "../controllers/grupos.controller.js";
 const testRouter = Router();
 
 //Rotas para os Testes
-testRouter.get("/", testeController.buscarTodos);
+testRouter.get("/",testeController.listarTestesPorFiltro);
 testRouter.get("/findTesteById/:id", testeController.buscarPorId);
 testRouter.post("/created", testeController.criarTeste);
 testRouter.delete("/deleted/:id", testeController.excluirTeste);
