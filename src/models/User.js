@@ -6,10 +6,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    username: {
-        type: String,
-        require: true
-    },
     email: {
         type: String,
         require: true,
@@ -18,14 +14,10 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         require: true
-    },
-    avatar: {
-        type: String,
-        require: true
     }
 });
 
-UserSchema.pre("save", async function(next) {
+UserSchema.pre("save", async function (next) {
     this.password = bcrypt.hashSync(this.password, 10);
     next();
 });
