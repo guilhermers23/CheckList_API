@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const TestesSchema = new mongoose.Schema({
     tecnico: {
-        type: String,
+        type: mongoose.Types.ObjectId,
+        ref: "User",
         required: true,
     },
     grupo: {

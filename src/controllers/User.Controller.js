@@ -1,11 +1,11 @@
-import userService from "../services/User.Service.js";
+import UserService from "../services/user.service.js";
 
 class UserController {
     createUserController = async (req, res) => {
         try {
             const { name, email, password } = req.body;
 
-            const token = await userService.createUserService({
+            const token = await UserService.createUserService({
                 name,
                 email,
                 password,
@@ -19,7 +19,7 @@ class UserController {
 
     findAllUserController = async (req, res) => {
         try {
-            const users = await userService.findAllUserService();
+            const users = await UserService.findAllUserService();
             return res.send(users);
         } catch (e) {
             return res.status(404).send(e.message);
@@ -28,7 +28,7 @@ class UserController {
 
     findUserByIdController = async (req, res) => {
         try {
-            const user = await userService.findUserByIdService(
+            const user = await UserService.findUserByIdService(
                 req.params.id,
                 req.userId
             );
@@ -45,7 +45,7 @@ class UserController {
             const { id: userId } = req.params;
             const userIdLogged = req.userId;
 
-            const response = await userService.updateUserService(
+            const response = await UserService.updateUserService(
                 { name, email, password },
                 userId,
                 userIdLogged

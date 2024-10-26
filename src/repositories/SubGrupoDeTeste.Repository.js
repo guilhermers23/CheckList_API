@@ -1,20 +1,20 @@
 import SubGrupoDeTeste from "../models/SubGrupoDeTeste.js";
 
 class SubGrupoDeTesteRepository {
-  async criarSubGrupo(data) {
+  criarSubGrupo = async (data) => {
     const novoSubGrupo = new SubGrupoDeTeste(data);
     return await novoSubGrupo.save();
   };
 
-  async buscarPorNome(nome) {
+  buscarPorNome = async (nome) => {
     return await SubGrupoDeTeste.findOne({ nome });
   };
 
-  async buscarTodosSubGrupos() {
+  buscarTodosSubGrupos = async () => {
     return await SubGrupoDeTeste.find().populate('grupo');
   };
 
-  async buscarPorGrupo(grupoId) {
+  buscarPorGrupo= async(grupoId) => {
     return await SubGrupoDeTeste.find({ grupo: grupoId });
   };
 }

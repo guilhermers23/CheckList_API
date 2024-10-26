@@ -1,20 +1,20 @@
-import TesteService from "../services/Teste.Service.js";
+import TesteService from "../services/teste.service.js";
 
 class TesteController {
-  async criarTeste(req, res) {
+  criarTeste = async (req, res) => {
     try {
-      const { tecnico, grupoNome, subGrupoNome, description, resultado, completed, observacao } = req.body;
+      const { grupoNome, subGrupoNome, description, resultado, completed, observacao } = req.body;
+      const tecnico = req.userId;
 
       // Criar novo teste com grupo e subgrupo
       const teste = await TesteService.criarTeste({
-        tecnico,
         grupoNome,
         subGrupoNome,
         description,
         resultado,
         completed,
         observacao
-      });
+      }, tecnico);
 
       return res.status(201).json(teste);
     } catch (error) {
@@ -22,7 +22,7 @@ class TesteController {
     }
   };
 
-  async buscarPorId(req, res) {
+  buscarPorId = async (req, res) => {
     try {
       const teste = await TesteService.buscarPorId(req.params.id);
       return res.status(200).json(teste);
@@ -31,7 +31,7 @@ class TesteController {
     }
   };
 
-  async atualizarTeste(req, res) {
+  atualizarTeste = async (req, res) => {
     try {
       const teste = await TesteService.atualizarTeste(req.params.id, req.body);
       return res.status(200).json(teste);
@@ -40,16 +40,31 @@ class TesteController {
     }
   };
 
-  async excluirTeste(req, res) {
+  excluirTeste = async (req, res) => {
     try {
-      await TesteService.excluirTeste(req.params.id);
-      return res.status(204).send();
+      const { id } = req.params;
+      const tecnico = req.userId;
+
+      await TesteService.excluirTeste(id, tecnico);
+      return res.status(204).json({ message: "Teste Excluido com sucesso!" });
     } catch (error) {
       return res.status(404).json({ error: error.message });
     }
   };
 
-  async listarTestesPorFiltro(req, res) {
+  findTestesByUserIdController = async (req, res) => {
+    const id = req.userId;
+
+    try {
+      const testes = await TesteService.findTestesByUserIdService(id);
+      return res.send(testes);
+    } catch (e) {
+      console.error("Error:", e)
+      return res.status(500).send(e.message);
+    }
+  };
+
+  listarTestesPorFiltro = async (req, res) => {
     try {
       const { grupoId, subGrupoId } = req.query;
       const testes = await TesteService.buscarTestesPorFiltro(grupoId, subGrupoId);

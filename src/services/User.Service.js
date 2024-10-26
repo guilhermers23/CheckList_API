@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
-import authService from "./auth.service.js";
-import UserRepository from "../repositories/User.Repository.js";
+import UserRepository from "../repositories/user.repository.js";
+import { generateToken } from "./Auth.Service.js";
 
 class UserService {
     createUserService = async ({ name, email, password }) => {
@@ -18,7 +18,7 @@ class UserService {
 
         if (!user) throw new Error("Usuário registrado com Sucesso!");
 
-        const token = authService.generateToken(user.id);
+        const token = generateToken(user.id);
 
         return token;
     };

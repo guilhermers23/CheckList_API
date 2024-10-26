@@ -1,28 +1,48 @@
 import Teste from "../models/Teste.js";
 
 class TesteRepository {
-    async criarTeste(data) {
+    criarTeste = async (data) => {
         const novoTeste = new Teste(data);
         return await novoTeste.save();
     };
 
-    async buscarPorId(id) {
+    buscarPorId = async (id) => {
         return await Teste.findById(id)
             .populate("grupo")
-            .populate("subGrupo");
+            .populate("subGrupo")
+            .populate({
+                path: "tecnico",
+                select: "-email -senha"
+            });
     };
 
-    async buscarPorFiltro(filtro) {
+    findTestesByUserIdRepository = (id) => {
+        return Teste.find({
+            tecnico: id,
+        })
+            .populate("grupo")
+            .populate("subGrupo")
+            .populate({
+                path: "tecnico",
+                select: "-email -password"
+            });
+    };
+
+    buscarPorFiltro = async (filtro) => {
         return await Teste.find(filtro)
             .populate('grupo')
-            .populate('subGrupo');
+            .populate('subGrupo')
+            .populate({
+                path: "tecnico",
+                select: "-email -password"
+            });
     };
 
-    async atualizarTeste(id, data) {
+    atualizarTeste = async (id, data) => {
         return await Teste.findByIdAndUpdate(id, data, { new: true });
     };
 
-    async excluirTeste(id) {
+    excluirTeste = async (id) => {
         return await Teste.findByIdAndDelete(id);
     };
 

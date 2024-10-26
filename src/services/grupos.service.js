@@ -1,25 +1,25 @@
-import GrupoDeTesteRepository from "../repositories/GrupoDeTeste.Repository.js";
-import SubGrupoDeTesteRepository from "../repositories/SubGrupoDeTeste.Repository.js";
+import GrupoDeTesteRepository from "../repositories/grupoDeTeste.repository.js";
+import SubGrupoDeTesteRepository from "../repositories/subGrupoDeTeste.repository.js";
 
 class GruposService {
 
-  async criarGrupo(data) {
+  criarGrupo = async (data) => {
     return await GrupoDeTesteRepository.criarGrupo(data);
   };
 
-  async buscarTodosGrupos() {
+  buscarTodosGrupos = async () => {
     return await GrupoDeTesteRepository.buscarTodosGrupos();
   };
 
-  async criarSubGrupo(data) {
+  criarSubGrupo = async (data) => {
     return await SubGrupoDeTesteRepository.criarSubGrupo(data);
   };
 
-  async buscarTodosSubGrupos() {
+  buscarTodosSubGrupos = async () => {
     return await SubGrupoDeTesteRepository.buscarTodosSubGrupos();
   };
 
-  async buscarPorGrupo(grupoId) {
+  buscarPorGrupo = async (grupoId) => {
     return await SubGrupoDeTesteRepository.buscarPorGrupo(grupoId);
   };
 }

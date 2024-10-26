@@ -1,9 +1,9 @@
-import TesteRepository from "../repositories/Teste.Repository.js";
-import GrupoDeTesteRepository from "../repositories/GrupoDeTeste.Repository.js";
-import SubGrupoDeTesteRepository from "../repositories/SubGrupoDeTeste.Repository.js";
+import TesteRepository from "../repositories/teste.repository.js";
+import GrupoDeTesteRepository from "../repositories/grupoDeTeste.repository.js";
+import SubGrupoDeTesteRepository from "../repositories/subGrupoDeTeste.repository.js";
 
 class TesteService {
-  async criarTeste(data) {
+  criarTeste = async (data, tecnico) => {
     // Buscar ou criar o grupo de teste
     let grupo = await GrupoDeTesteRepository.buscarPorNome(data.grupoNome);
     if (!grupo) {
@@ -21,7 +21,7 @@ class TesteService {
 
     // Criar o teste, referenciando o grupo e subgrupo
     const novoTeste = await TesteRepository.criarTeste({
-      tecnico: data.tecnico,
+      tecnico: tecnico,
       grupo: grupo._id,
       subGrupo: subGrupo._id,
       description: data.description,
@@ -31,9 +31,26 @@ class TesteService {
     });
 
     return novoTeste;
-  }
+  };
 
-  async buscarPorId(id) {
+  findTestesByUserIdService = async (id) => {
+    const testes = await TesteRepository.findTestesByUserIdRepository(id);
+
+    return {
+      testesByUser: testes.map((teste) => ({
+        id: teste._id,
+        tecnico: teste.tecnico.name,
+        grupo: teste.grupo._id,
+        subGrupo: teste.subGrupo._id,
+        description: teste.description,
+        resultado: teste.resultado,
+        completed: teste.completed,
+        observacao: teste.observacao
+      })),
+    };
+  };
+
+  buscarPorId = async (id) => {
     const teste = await TesteRepository.buscarPorId(id);
     if (!teste) {
       throw new Error("Teste não encontrado");
@@ -41,7 +58,7 @@ class TesteService {
     return teste;
   };
 
-  async buscarTestesPorFiltro(grupoId, subGrupoId) {
+  buscarTestesPorFiltro = async (grupoId, subGrupoId) => {
     const filtro = {};
     if (grupoId) filtro.grupo = grupoId;
     if (subGrupoId) filtro.subGrupo = subGrupoId;
@@ -49,7 +66,7 @@ class TesteService {
     return await TesteRepository.buscarPorFiltro(filtro);
   };
 
-  async atualizarTeste(id, data) {
+  atualizarTeste = async (id, data) => {
     const teste = await this.buscarPorId(id);
     if (!teste) {
       throw new Error("Teste não encontrado");
@@ -58,7 +75,7 @@ class TesteService {
   };
 
 
-  async excluirTeste(id) {
+  excluirTeste = async (id) => {
     const teste = await this.buscarPorId(id);
     if (!teste) {
       throw new Error("Teste não encontrado");

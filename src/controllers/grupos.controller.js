@@ -2,7 +2,7 @@ import gruposService from "../services/grupos.service.js";
 
 class GruposController {
 
-    async criarGrupo(req, res) {
+    criarGrupo = async (req, res) => {
         try {
             const { nome } = req.body;
 
@@ -15,7 +15,7 @@ class GruposController {
         }
     };
 
-    async buscarTodosGrupos(req, res) {
+    buscarTodosGrupos = async (req, res) => {
         try {
             const grupos = await gruposService.buscarTodosGrupos();
             if (grupos.length === 0) {
@@ -27,7 +27,7 @@ class GruposController {
         }
     };
 
-    async criarSubGrupo(req, res) {
+    criarSubGrupo = async (req, res) => {
         try {
             const { nome, grupoId } = req.body;
 
@@ -40,7 +40,7 @@ class GruposController {
         }
     };
 
-    async buscarTodosSubGrupos(req, res) {
+    buscarTodosSubGrupos = async (req, res) => {
         try {
             const subGrupos = await gruposService.buscarTodosSubGrupos();
             if (subGrupos.length === 0) {
@@ -52,7 +52,7 @@ class GruposController {
         }
     };
 
-    async buscarSubGruposPorGrupo(req, res) {
+    buscarSubGruposPorGrupo = async (req, res) => {
         try {
             const { grupoId } = req.params;
             const subGrupos = await gruposService.buscarPorGrupo(grupoId);
