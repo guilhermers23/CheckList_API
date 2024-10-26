@@ -10,7 +10,7 @@ gruposRouter.get("/subGrupo", GruposController.buscarTodosSubGrupos);
 gruposRouter.get("/subgrupos/por-grupo/:grupoId", GruposController.buscarSubGruposPorGrupo);
 
 gruposRouter.use(AuthMiddleware.validTokenhMiddleware);
-gruposRouter.post("/created/", GruposController.criarGrupo);
+gruposRouter.post("/created", GruposController.criarGrupo);
 gruposRouter.post("/subGrupo/created", GruposController.criarSubGrupo);
 
 export default gruposRouter;
