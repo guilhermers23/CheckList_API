@@ -1,6 +1,6 @@
 import Teste from "../models/Teste.js";
 
-class TesteRepository {
+class TaskRepository {
     criarTeste = async (data) => {
         const novoTeste = new Teste(data);
         return await novoTeste.save();
@@ -12,7 +12,7 @@ class TesteRepository {
             .populate("subGrupo")
             .populate({
                 path: "tecnico",
-                select: "-email -senha"
+                select: "-email -password"
             });
     };
 
@@ -48,4 +48,4 @@ class TesteRepository {
 
 }
 
-export default new TesteRepository();
+export default new TaskRepository();
