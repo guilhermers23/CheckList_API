@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import userRepository from "../repositories/user.repository.js";
+import UserRepository from "../repositories/user.repository.js";
 
 class AuthMiddleware {
 
@@ -26,7 +26,7 @@ class AuthMiddleware {
                 if (error) return res.status(401)
                     .send({ message: "Token inválido!" });
 
-                const user = await userRepository.findByIdUserRepository(decoded.id);
+                const user = await UserRepository.findByIdUserRepository(decoded.id);
                 if (!user || !user.id)
                     return res.status(401)
                         .send({ message: "Token inválido!" });

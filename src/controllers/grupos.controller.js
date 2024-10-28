@@ -1,4 +1,4 @@
-import gruposService from "../services/grupos.service.js";
+import GruposService from "../services/grupos.service.js";
 
 class GruposController {
 
@@ -7,7 +7,7 @@ class GruposController {
             const { nome } = req.body;
 
             // Criar novo grupo
-            const grupo = await gruposService.criarGrupo({ nome });
+            const grupo = await GruposService.criarGrupo({ nome });
 
             return res.status(201).json(grupo);
         } catch (error) {
@@ -17,7 +17,7 @@ class GruposController {
 
     buscarTodosGrupos = async (req, res) => {
         try {
-            const grupos = await gruposService.buscarTodosGrupos();
+            const grupos = await GruposService.buscarTodosGrupos();
             if (grupos.length === 0) {
                 res.json({ message: "Nenhum grupo encontrado!" })
             }
@@ -32,7 +32,7 @@ class GruposController {
             const { nome, grupoId } = req.body;
 
             // Criar novo subgrupo referenciando o grupo
-            const subGrupo = await gruposService.criarSubGrupo({ nome, grupo: grupoId });
+            const subGrupo = await GruposService.criarSubGrupo({ nome, grupo: grupoId });
 
             return res.status(201).json(subGrupo);
         } catch (error) {
@@ -42,7 +42,7 @@ class GruposController {
 
     buscarTodosSubGrupos = async (req, res) => {
         try {
-            const subGrupos = await gruposService.buscarTodosSubGrupos();
+            const subGrupos = await GruposService.buscarTodosSubGrupos();
             if (subGrupos.length === 0) {
                 res.json({ message: "Nenhum SubGrupo encontrado!" })
             }
@@ -55,7 +55,7 @@ class GruposController {
     buscarSubGruposPorGrupo = async (req, res) => {
         try {
             const { grupoId } = req.params;
-            const subGrupos = await gruposService.buscarPorGrupo(grupoId);
+            const subGrupos = await GruposService.buscarPorGrupo(grupoId);
 
             return res.status(200).json(subGrupos);
         } catch (error) {
