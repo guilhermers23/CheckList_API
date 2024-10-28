@@ -1,4 +1,4 @@
-import TaskService from "../services/task.service.js"
+import TaskService from "../services/taskService.js";
 
 class TaskController {
     async criarTeste(req, res) {

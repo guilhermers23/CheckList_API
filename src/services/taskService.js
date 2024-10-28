@@ -1,6 +1,6 @@
-import taskRepository from "../repositories/task.repository.js";
-import GrupoDeTesteRepository from "../repositories/grupoDeTeste.repository.js";
-import SubGrupoDeTesteRepository from "../repositories/subGrupoDeTeste.repository.js";
+import taskRepository from "../repositories/taskRepository.js";
+import GrupoDeTesteRepository from "../repositories/grupoDeTesteRepository.js";
+import SubGrupoDeTesteRepository from "../repositories/subGrupoDeTesteRepository.js";
 
 class TaskService {
     criarTeste = async (data, tecnico) => {

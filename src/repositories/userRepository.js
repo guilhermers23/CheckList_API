@@ -1,7 +1,6 @@
 import User from "../models/User.js";
 
 class UserRepository {
-
     findAllUserRepository = async () => {
         return await User.find();
     };

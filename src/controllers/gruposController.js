@@ -1,4 +1,4 @@
-import GruposService from "../services/grupos.service.js";
+import GruposService from "../services/gruposService.js";
 
 class GruposController {
 

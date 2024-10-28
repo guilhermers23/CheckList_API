@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
-import UserRepository from "../repositories/user.repository.js";
-import { generateToken } from "./auth.service.js";
+import UserRepository from "../repositories/userRepository.js";
+import { generateToken } from "./authService.js";
 
 class UserService {
     createUserService = async ({ name, email, password }) => {

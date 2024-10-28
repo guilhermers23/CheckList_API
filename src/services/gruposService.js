@@ -1,5 +1,5 @@
-import GrupoDeTesteRepository from "../repositories/grupoDeTeste.repository.js";
-import SubGrupoDeTesteRepository from "../repositories/subGrupoDeTeste.repository.js";
+import GrupoDeTesteRepository from "../repositories/grupoDeTesteRepository.js";
+import SubGrupoDeTesteRepository from "../repositories/subGrupoDeTesteRepository.js";
 
 class GruposService {
 

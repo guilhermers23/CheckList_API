@@ -1,7 +1,7 @@
 import { Router } from "express";
-import globalMiddleware from "../middlewares/global.middleware.js";
-import authMiddleware from "../middlewares/auth.middleware.js";
-import taskController from "../controllers/task.controller.js";
+import globalMiddleware from "../middlewares/globalMiddleware.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
+import taskController from "../controllers/taskController.js";
 
 const testRouter = Router();
 

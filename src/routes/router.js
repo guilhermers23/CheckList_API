@@ -1,8 +1,8 @@
 import { Router } from "express";
-import gruposRouter from "./grupos.router.js";
-import authRouter from "./auth.router.js";
-import userRouter from "./user.router.js";
-import testeRouter from "./task.router.js";
+import gruposRouter from "./gruposRouter.js";
+import authRouter from "./authRouter.js";
+import userRouter from "./userRouter.js";
+import testeRouter from "./taskRouter.js";
 
 const router = Router();
 

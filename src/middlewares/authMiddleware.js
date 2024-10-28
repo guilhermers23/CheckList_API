@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import UserRepository from "../repositories/user.repository.js";
+import UserRepository from "../repositories/userRepository.js";
 
 class AuthMiddleware {
 

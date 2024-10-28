@@ -1,11 +1,11 @@
-import AuthService from "../services/auth.service.js";
+import authService from "../services/authService.js";
 
 class AuthController {
     loginController = async (req, res) => {
         const { email, password } = req.body;
 
         try {
-            const token = await AuthService.loginService({ email, password });
+            const token = await authService.loginService({ email, password });
             return res.json({
                 token
             });
