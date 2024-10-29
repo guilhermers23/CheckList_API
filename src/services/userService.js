@@ -47,10 +47,10 @@ class UserService {
         return user;
     };
 
-    updateUserService = async ({ name, email, password },
+    updateUserService = async ({ name, email, password, admin },
         userId, userIdLogged) => {
 
-        if (!name && !email && !password)
+        if (!name && !email && !password && !admin)
             throw new Error("Falha ao enviar durante a atualização dos dados! Altere pelo menos alguns campos.");
 
         const user = await UserRepository.findByIdUserRepository(userId);
@@ -63,7 +63,8 @@ class UserService {
             userId,
             name,
             email,
-            password
+            password,
+            admin
         );
 
         return { message: "Usuario Atualizado!" };

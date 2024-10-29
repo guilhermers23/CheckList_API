@@ -14,6 +14,10 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         require: true
+    },
+    admin: {
+        type: Boolean,
+        require: true
     }
 });
 
