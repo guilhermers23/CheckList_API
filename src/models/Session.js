@@ -1,30 +1,33 @@
-// models/Session.js
 import mongoose from "mongoose";
 
 const SessionSchema = new mongoose.Schema({
-    tecnicoId: {
+    tecnico: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
         required: true
     },
     grupo: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Group',
         required: true
     },
-    subgrupo: {
-        type: String,
+    subGrupo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'SubGroup',
         required: true
     },
-    tests: [
-        {
-            testName: String,
-            status: String,
-            resultado: String,
-        },
-    ],
-    criadoEm: { type: Date, default: Date.now },
+    status: {
+        type: String,
+        enum: ['Em Progresso', 'Finalizado'], default: 'Em Progresso'
+    },
+    testes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Test'
+    }], // Lista de testes associados
+    dataInicio: { type: Date, default: Date.now },
+    dataFim: { type: Date }
 });
 
-const Session = mongoose.model("Session", SessionSchema);
+const Sessao = mongoose.model("Sessao", SessionSchema);
 
-export default Session;
+export default Sessao;

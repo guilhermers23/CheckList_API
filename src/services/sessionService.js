@@ -1,31 +1,17 @@
-import sessionRepository from "../repositories/sessionRepository.js";
+import SessaoRepository from "../repositories/sessionRepository.js";
 
-class SessionService {
-    async startSession(tecnicoId, grupo, subgrupo) {
-        const newSession = await sessionRepository.createSession({ tecnicoId, grupo, subgrupo, tests: [] });
-        return newSession;
+class SessaoService {
+    startSession = async (sessionData) => {
+        return await SessaoRepository.createSession(sessionData);
     };
 
-    async addTestToSession(sessionId, testName, status, resultado) {
-        const test = { testName, status, resultado };
-        return await sessionRepository.addTestResult(sessionId, test);
+    completeSession = async (sessionId) => {
+        return await SessaoRepository.updateSessionStatus(sessionId, 'Finalizado', new Date());
     };
 
-    async generateReport(sessionId) {
-        const session = await sessionRepository.findSessionById(sessionId);
-        if (!session) throw new Error("Sessão não encontrada");
-
-        // Exemplo de relatório básico, personalizável conforme necessidade
-        const report = {
-            tecnico: session.tecnicoId.nome,
-            grupo: session.grupo,
-            subgrupo: session.subgrupo,
-            tests: session.tests,
-            criadoEm: session.criadoEm,
-        };
-        return report;
+    getSessionReport = async (sessionId) => {
+        return await SessaoRepository.getSessionById(sessionId);
     };
 };
 
-export default new SessionService();
-
+export default new SessaoService();

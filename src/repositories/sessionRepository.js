@@ -1,21 +1,18 @@
-import Session from "../models/Session.js";
+import Sessao from "../models/Session.js";
 
-class SessionRepository {
-  async createSession(data) {
-    return await Session.create(data);
+class SessaoRepository {
+  createSession = async (sessionData) => {
+    const newSession = new Sessao(sessionData);
+    return await newSession.save();
   };
 
-  async findSessionById(sessionId) {
-    return await Session.findById(sessionId).populate('tecnicoId');
+  getSessionById = async (sessionId) => {
+    return await Sessao.findById(sessionId).populate('testes');
   };
 
-  async addTestResult(sessionId, test) {
-    return await Session.findByIdAndUpdate(sessionId, { $push: { tests: test } }, { new: true });
-  };
-
-  async findSessionsByTecnico(tecnicoId) {
-    return await Session.find({ tecnicoId });
+  updateSessionStatus = async (sessionId, status, dataFim = null) => {
+    return await Sessao.findByIdAndUpdate(sessionId, { status, dataFim }, { new: true });
   };
 };
 
-export default new SessionRepository();
+export default new SessaoRepository();

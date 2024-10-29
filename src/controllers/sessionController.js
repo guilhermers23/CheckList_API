@@ -1,36 +1,37 @@
-import sessionService from "../services/sessionService.js";
+import SessaoService from "../services/sessionService.js";
 
-class SessionController {
-    async startSession(req, res) {
-        const { tecnicoId, grupo, subgrupo } = req.body;
+class SessaoController {
+    startSession = async (req, res) => {
         try {
-            const session = await sessionService.startSession(tecnicoId, grupo, subgrupo);
+            const sessionData = {
+                tecnico: req.user.id, // Pega o ID do técnico logado 
+                grupo: req.body.grupoId,
+                subGrupo: req.body.subGrupoId
+            };
+            const session = await SessaoService.startSession(sessionData);
             res.status(201).json(session);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ message: 'Erro ao iniciar a sessão.', error });
         }
     };
 
-    async addTestToSession(req, res) {
-        const { sessionId } = req.params;
-        const { testName, status, resultado } = req.body;
+    completeSession = async (req, res) => {
         try {
-            const updatedSession = await sessionService.addTestToSession(sessionId, testName, status, resultado);
-            res.status(200).json(updatedSession);
+            const session = await SessaoService.completeSession(req.params.id);
+            res.status(200).json(session);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ message: 'Erro ao finalizar a sessão.', error });
         }
     };
 
-    async generateReport(req, res) {
-        const { sessionId } = req.params;
+    getSessionReport = async (req, res) => {
         try {
-            const report = await sessionService.generateReport(sessionId);
-            res.status(200).json(report);
+            const session = await SessaoService.getSessionReport(req.params.id);
+            res.status(200).json(session);
         } catch (error) {
-            res.status(404).json({ message: error.message });
+            res.status(500).json({ message: 'Erro ao obter o relatório da sessão.', error });
         }
     };
 };
 
-export default new SessionController();
+export default new SessaoController();

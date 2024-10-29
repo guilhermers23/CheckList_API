@@ -1,10 +1,10 @@
 import { Router } from "express";
-import sessionController from "../controllers/sessionController.js";
+import sessaoController from "../controllers/sessionController.js";
 
 const sessionRouter = Router();
 
-sessionRouter.post('/start', sessionController.startSession);
-sessionRouter.post('/:sessionId/tests', sessionController.addTestToSession);
-sessionRouter.get('/:sessionId/report', sessionController.generateReport);
+sessionRouter.post('/start', sessaoController.startSession);
+sessionRouter.put('/complete/:id', sessaoController.completeSession);
+sessionRouter.get('/report/:id', sessaoController.getSessionReport);
 
-export default sessionRouter();
+export default sessionRouter;
