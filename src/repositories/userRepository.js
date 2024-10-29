@@ -9,8 +9,8 @@ class UserRepository {
         return await User.findOne({ email: email });
     };
 
-    createUserRepository = async ({ name, email, password, }) => {
-        const novoUsuario = new User({ name, email, password });
+    createUserRepository = async ({ name, email, password, admin}) => {
+        const novoUsuario = new User({ name, email, password, admin: false });
         return await novoUsuario.save()
     };
 
@@ -18,10 +18,10 @@ class UserRepository {
         return await User.findById(id);
     };
 
-    updateUserRepository = async (id, name, email, password) => {
+    updateUserRepository = async (id, name, email, password, admin) => {
         return await User.findByIdAndUpdate(
             { _id: id },
-            { name, email, password },
+            { name, email, password, admin },
             { rawResult: true }
         );
     };

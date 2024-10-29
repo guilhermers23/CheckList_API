@@ -3,12 +3,13 @@ import UserService from "../services/userService.js";
 class UserController {
     createUserController = async (req, res) => {
         try {
-            const { name, email, password } = req.body;
+            const { name, email, password, admin } = req.body;
 
             const token = await UserService.createUserService({
                 name,
                 email,
                 password,
+                admin
             });
 
             return res.status(201).send({ token });
@@ -41,12 +42,12 @@ class UserController {
 
     updateUserController = async (req, res) => {
         try {
-            const { name, email, password } = req.body;
+            const { name, email, password, admin } = req.body;
             const { id: userId } = req.params;
             const userIdLogged = req.userId;
 
             const response = await UserService.updateUserService(
-                { name, email, password },
+                { name, email, password, admin },
                 userId,
                 userIdLogged
             );
