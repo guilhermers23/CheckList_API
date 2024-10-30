@@ -6,13 +6,29 @@ class SessaoRepository {
     return await newSession.save();
   };
 
-  getSessionById = async (sessionId) => {
-    return await Sessao.findById(sessionId).populate('testes');
+  // Função para encontrar uma sessão pelo ID
+  findSessionById = async (sessionId) => {
+    return await Sessao.findById(sessionId);
   };
 
-  updateSessionStatus = async (sessionId, status, dataFim = null) => {
-    return await Sessao.findByIdAndUpdate(sessionId, { status, dataFim }, { new: true });
-  };
+  // Função para salvar as alterações na sessão
+  finalizeSession = async (sessionId, testesAtualizados) => {
+    return await Sessao.findByIdAndUpdate(
+      sessionId,
+      {
+        status: 'Finalizado',
+        testes: testesAtualizados,
+        dataFim: new Date(),
+      },
+      { new: true }
+    );
+  }
+
+  findAllSessions = async () => {
+    return await Sessao.find()
+      .populate("testes")
+      .populate("tecnico")
+  }
 };
 
 export default new SessaoRepository();

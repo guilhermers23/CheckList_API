@@ -18,11 +18,12 @@ const SessionSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['Em Progresso', 'Finalizado'], default: 'Em Progresso'
+        default: 'Em Progresso',
+        require: true
     },
     testes: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Test'
+        ref: 'Teste'
     }], // Lista de testes associados
     dataInicio: { type: Date, default: Date.now },
     dataFim: { type: Date }

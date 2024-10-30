@@ -3,8 +3,8 @@ import sessaoController from "../controllers/sessionController.js";
 
 const sessionRouter = Router();
 
+sessionRouter.get('/', sessaoController.getAllSessions);
 sessionRouter.post('/start', sessaoController.startSession);
-sessionRouter.put('/complete/:id', sessaoController.completeSession);
-sessionRouter.get('/report/:id', sessaoController.getSessionReport);
+sessionRouter.patch('/:sessionId/finalize', sessaoController.finalizeSession);
 
 export default sessionRouter;
