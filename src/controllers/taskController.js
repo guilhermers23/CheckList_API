@@ -3,13 +3,13 @@ import TaskService from "../services/taskService.js";
 class TaskController {
     async criarTeste(req, res) {
         try {
-            const { grupoNome, subGrupoNome, description, resultado, completed, observacao } = req.body;
+            const { grupoID, subGrupoID, description, resultado, completed, observacao } = req.body;
             const tecnico = req.userId;
 
             // Criar novo teste com grupo e subgrupo
-            const teste = await TaskService.criarTeste({
-                grupoNome,
-                subGrupoNome,
+            const teste = await TaskService.criarTestePeloIDGrupo({
+                grupoID,
+                subGrupoID,
                 description,
                 resultado,
                 completed,

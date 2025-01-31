@@ -10,11 +10,15 @@ class SubGrupoDeTesteRepository {
     return await SubGrupoDeTeste.findOne({ nome });
   };
 
+  buscarPorID = async (_id) => {
+    return await SubGrupoDeTeste.findOne({ _id });
+  };
+
   buscarTodosSubGrupos = async () => {
     return await SubGrupoDeTeste.find().populate('grupo');
   };
 
-  buscarPorGrupo= async(grupoId) => {
+  buscarPorGrupo = async (grupoId) => {
     return await SubGrupoDeTeste.find({ grupo: grupoId });
   };
 }

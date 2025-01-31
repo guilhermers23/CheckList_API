@@ -10,6 +10,10 @@ class GrupoDeTesteRepository {
     return await GrupoDeTeste.findOne({ nome });
   };
 
+  buscarPorID = async (_id) => {
+    return await GrupoDeTeste.findOne({ _id });
+  };
+
   buscarTodosGrupos = async () => {
     return await GrupoDeTeste.find();
   };
