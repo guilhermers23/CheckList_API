@@ -9,7 +9,7 @@ class UserRepository {
         return await User.findOne({ email: email });
     };
 
-    createUserRepository = async ({ name, email, password, admin}) => {
+    createUserRepository = async ({ name, email, password, admin }) => {
         const novoUsuario = new User({ name, email, password, admin: false });
         return await novoUsuario.save()
     };
@@ -24,6 +24,10 @@ class UserRepository {
             { name, email, password, admin },
             { rawResult: true }
         );
+    };
+
+    excluirUsuario = async (id) => {
+        return await User.findByIdAndDelete(id);
     };
 };
 

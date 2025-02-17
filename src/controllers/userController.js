@@ -1,3 +1,4 @@
+import userService from "../services/userService.js";
 import UserService from "../services/userService.js";
 
 class UserController {
@@ -55,6 +56,17 @@ class UserController {
             return res.send(response);
         } catch (e) {
             res.status(400).send(e.message);
+        }
+    };
+
+    excluirUser = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const tecnico = req.userId;
+            await userService.excluirUsuario(id, tecnico);
+            return res.status(204).json({ message: "Teste Excluido com sucesso!" });
+        } catch (error) {
+            return res.status(404).json({ error: error.message });
         }
     };
 };

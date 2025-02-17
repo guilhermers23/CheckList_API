@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import UserRepository from "../repositories/userRepository.js";
 import { generateToken } from "./authService.js";
+import userRepository from "../repositories/userRepository.js";
 
 class UserService {
     createUserService = async ({ name, email, password }) => {
@@ -68,8 +69,15 @@ class UserService {
         );
 
         return { message: "Usuario Atualizado!" };
-    }
+    };
 
+    excluirUsuario = async (id) => {
+        const user = await this.findUserByIdService(id);
+        if (!user) {
+            throw new Error("Usuário não encontrado");
+        }
+        return await userRepository.excluirUsuario(id);
+    };
 };
 
 export default new UserService();

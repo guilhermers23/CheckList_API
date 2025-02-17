@@ -22,9 +22,9 @@ const SessionSchema = new mongoose.Schema({
         require: true
     },
     testes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Teste'
-    }], // Lista de testes associados
+        type: Array,
+        require: true
+    } ], // Lista de testes associados
     dataInicio: { type: Date, default: Date.now },
     dataFim: { type: Date }
 });
