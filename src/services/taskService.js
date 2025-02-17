@@ -3,6 +3,7 @@ import GrupoDeTesteRepository from "../repositories/grupoDeTesteRepository.js";
 import SubGrupoDeTesteRepository from "../repositories/subGrupoDeTesteRepository.js";
 
 class TaskService {
+    //BUSCA PELO NOME DO GRUPO
     criarTeste = async (data, tecnico) => {
         // Buscar ou criar o grupo de teste
         let grupo = await GrupoDeTesteRepository.buscarPorNome(data.grupoNome);
@@ -24,6 +25,25 @@ class TaskService {
             tecnico: tecnico,
             grupo: grupo._id,
             subGrupo: subGrupo._id,
+            description: data.description,
+            resultado: data.resultado,
+            completed: data.completed,
+            observacao: data.observacao
+        });
+
+        return novoTeste;
+    };
+
+    criarTestePeloIDGrupo = async (data, tecnico) => {
+        // Buscar o grupo de teste
+        let grupoID = await GrupoDeTesteRepository.buscarPorID(data.grupoID);
+        // Buscar o subgrupo de teste, referenciando o grupo
+        let subGrupoID = await SubGrupoDeTesteRepository.buscarPorID(data.subGrupoID);
+        // Criar o teste, referenciando o grupo e subgrupo
+        const novoTeste = await taskRepository.criarTeste({
+            tecnico: tecnico,
+            grupo: grupoID,
+            subGrupo: subGrupoID,
             description: data.description,
             resultado: data.resultado,
             completed: data.completed,
