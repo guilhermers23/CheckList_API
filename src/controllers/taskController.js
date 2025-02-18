@@ -3,7 +3,7 @@ import TaskService from "../services/taskService.js";
 class TaskController {
     async criarTeste(req, res) {
         try {
-            const { grupoID, subGrupoID, description, resultado, completed, observacao } = req.body;
+            const { grupoID, subGrupoID, description, resultado, completed, observacao, files } = req.body;
             const tecnico = req.userId;
 
             // Criar novo teste com grupo e subgrupo
@@ -13,7 +13,8 @@ class TaskController {
                 description,
                 resultado,
                 completed,
-                observacao
+                observacao,
+                files
             }, tecnico);
 
             return res.status(201).json(teste);
