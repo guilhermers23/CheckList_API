@@ -28,7 +28,8 @@ class TaskService {
             description: data.description,
             resultado: data.resultado,
             completed: data.completed,
-            observacao: data.observacao
+            observacao: data.observacao,
+            files: data.files
         });
 
         return novoTeste;
@@ -47,7 +48,8 @@ class TaskService {
             description: data.description,
             resultado: data.resultado,
             completed: data.completed,
-            observacao: data.observacao
+            observacao: data.observacao,
+            files: data.files
         });
 
         return novoTeste;
@@ -65,7 +67,8 @@ class TaskService {
                 description: teste.description,
                 resultado: teste.resultado,
                 completed: teste.completed,
-                observacao: teste.observacao
+                observacao: teste.observacao,
+                files: teste.files
             })),
         };
     };

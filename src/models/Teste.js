@@ -20,6 +20,10 @@ const TestesSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    files: {
+        type: String,
+        require: false
+    },
     resultado: {
         type: String,
         required: true,
