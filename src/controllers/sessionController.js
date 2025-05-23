@@ -4,14 +4,12 @@ class SessaoController {
     startSession = async (req, res) => {
         try {
             // Extraia e valide os campos esperados
-            const { tecnico, grupoId, subGrupoId, testes } = req.body;
-
-            if (!tecnico || !grupoId || !subGrupoId || !testes || !Array.isArray(testes)) {
+            const { tecnico, grupo, subGrupo, testes } = req.body;
+            if (!tecnico || !grupo || !subGrupo || !testes || !Array.isArray(testes)) {
                 return res.status(400).json({ message: "Dados inválidos para iniciar a sessão" });
             }
-
             // Continue com a criação da sessão
-            const sessionData = { tecnico, grupo: grupoId, subGrupo: subGrupoId, testes };
+            const sessionData = { tecnico, grupo, subGrupo, testes };
             const session = await SessaoService.startSession(sessionData);
             res.status(201).json(session);
         } catch (error) {

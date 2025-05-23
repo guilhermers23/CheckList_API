@@ -7,13 +7,11 @@ const SessionSchema = new mongoose.Schema({
         required: true
     },
     grupo: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Group',
+        type: String,
         required: true
     },
     subGrupo: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'SubGroup',
+        type: String,
         required: true
     },
     status: {
@@ -24,7 +22,7 @@ const SessionSchema = new mongoose.Schema({
     testes: [{
         type: Array,
         require: true
-    } ], // Lista de testes associados
+    }], // Lista de testes associados
     dataInicio: { type: Date, default: Date.now },
     dataFim: { type: Date }
 });
