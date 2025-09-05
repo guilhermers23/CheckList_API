@@ -10,7 +10,7 @@ class UserRepository {
     };
 
     createUserRepository = async ({ name, email, password, admin }) => {
-        const novoUsuario = new User({ name, email, password, admin: false });
+        const novoUsuario = new User({ name, email, password, admin });
         return await novoUsuario.save()
     };
 
