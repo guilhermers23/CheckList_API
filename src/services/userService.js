@@ -4,8 +4,8 @@ import { generateToken } from "./authService.js";
 import userRepository from "../repositories/userRepository.js";
 
 class UserService {
-    createUserService = async ({ name, email, password }) => {
-        if (!name || !email || !password)
+    createUserService = async ({ name, email, password, admin }) => {
+        if (!name || !email || !password || admin === undefined)
             throw new Error("Falha ao enviar dados! Verifique todos os campos.");
 
         const foundUser = await UserRepository.findByEmailUserRepository(email);
@@ -14,13 +14,12 @@ class UserService {
         const user = await UserRepository.createUserRepository({
             name,
             email,
-            password
+            password,
+            admin
         });
 
         if (!user) throw new Error("Usuário registrado com Sucesso!");
-
         const token = generateToken(user.id);
-
         return token;
     };
 
