@@ -55,7 +55,7 @@ class UserService {
 
         const user = await UserRepository.findByIdUserRepository(userId);
 
-        if (user._id != userIdLogged) throw new Error("Você não pode atualizar esse usuário.");
+        if (user.admin != userIdLogged) throw new Error("Você não pode atualizar esse usuário.");
 
         if (password) password = await bcrypt.hash(password, 10);
 

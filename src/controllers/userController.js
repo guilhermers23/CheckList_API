@@ -45,7 +45,7 @@ class UserController {
         try {
             const { name, email, password, admin } = req.body;
             const { id: userId } = req.params;
-            const userIdLogged = req.userId;
+            const userIdLogged = req.admin;
 
             const response = await UserService.updateUserService(
                 { name, email, password, admin },
